@@ -1,5 +1,8 @@
 package br.com.treinaweb.twgerenciadortarefas.controllers;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +14,8 @@ import br.com.treinaweb.twgerenciadortarefas.servicos.ServicoUsuario;
 
 @Controller
 public class ContaController {
+	
+	@Autowired
 	private ServicoUsuario servicoUsuario;
 
 	@GetMapping("/login")
@@ -27,14 +32,14 @@ public class ContaController {
 	}
 
 	@PostMapping("/registration")
-	public ModelAndView registration(Usuario usuario, BindingResult res) {
+	public ModelAndView registrar(@Valid Usuario usuario, BindingResult result) {
 		ModelAndView mv = new ModelAndView();
 		Usuario usr = servicoUsuario.encontrarPorEmail(usuario.getEmail());
 		if (usr != null) {
-			res.rejectValue("email", "", "Usuário já cadastrado");
+			result.rejectValue("email", "", "Usuário já cadastrado");
 		}
 
-		if (res.hasErrors()) {
+		if (result.hasErrors()) {
 			mv.setViewName("conta/registration");
 			mv.addObject("usuario", usuario);
 
