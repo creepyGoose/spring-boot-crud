@@ -11,40 +11,49 @@
 	</nav>
 
 	<div class="container">
-		<h3>Faça seu login!</h3>
+		<h3>Login</h3>
 		<form action="/login" method="post" class="form-signin">
-			<div class="form-group">
-				<div class="col-md-9">
-					<input type="text" maxlength="100" placeholder="E-mail"
-						class="form-control" name="email">
+
+			<div class="row">
+				<div class="form-group col-md-9">
+					<input type="text" class="form-control" placeholder="E-mail"
+						name="email">
 				</div>
 			</div>
 
-			<div class="form-group">
-				<div class="col-md-9">
-					<input type="password" maxlength="100" placeholder="Senha"
-						class="form-control" name="email">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<button type="submit" class="btn btn-primary">Entrar</button>
-			</div>
-
-			<div class="form-group">
-				<div class="col-md9">
-					<div class="alert alert-danger" role="alert" th:if="${param.error}">Não
-						foi possível fazer o seu login</div>
+			<div class="row">
+				<div class="form-group col-md-9">
+					<input type="password" class="form-control" placeholder="Senha"
+						name="password">
 				</div>
 
+				<div class="form-group">
+					<div class="col-md-9">
+						<div class="alert alert-danger" role="alert"
+							th:if="${param.error}">Não foi possível fazer o seu login!
+						</div>
+						
+					</div>
+				</div>
+
+
 			</div>
+			
 			<div class="form-group">
-				<span>Não possui conta? <a href="/registration">Registre-se
-						aqui!</a></span>
-			</div>
+							<span>Não possui conta? <a href="/registration">Cadastre-se</a></span>
+						</div>
+						
+							<button type="submit" class="btn btn-primary">Salvar</button>
+			
 
 		</form>
 	</div>
+
+
+
+
+
+
 
 
 	<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>

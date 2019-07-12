@@ -14,7 +14,7 @@ import br.com.treinaweb.twgerenciadortarefas.servicos.ServicoUsuario;
 
 @Controller
 public class ContaController {
-	
+
 	@Autowired
 	private ServicoUsuario servicoUsuario;
 
@@ -24,7 +24,7 @@ public class ContaController {
 	}
 
 	@GetMapping("/registration")
-	public ModelAndView registrarion() {
+	public ModelAndView registrar() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("conta/registrar");
 		mv.addObject("usuario", new Usuario());
@@ -38,17 +38,14 @@ public class ContaController {
 		if (usr != null) {
 			result.rejectValue("email", "", "Usuário já cadastrado");
 		}
-
 		if (result.hasErrors()) {
-			mv.setViewName("conta/registration");
+			mv.setViewName("conta/registrar");
 			mv.addObject("usuario", usuario);
-
 		} else {
 			servicoUsuario.salvar(usuario);
 			mv.setViewName("redirect:/login");
-
 		}
-		
+
 		return mv;
 	}
 

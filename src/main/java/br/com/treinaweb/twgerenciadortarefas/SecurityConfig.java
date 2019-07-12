@@ -1,6 +1,5 @@
 package br.com.treinaweb.twgerenciadortarefas;
 
-import javax.activation.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import antlr.actions.csharp.ActionLexer;
+
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -40,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/login").permitAll().antMatchers("/registration").permitAll().anyRequest()
 				.authenticated().and().csrf().disable().formLogin().loginPage("/login").failureUrl("/login?error=true")
-				.defaultSuccessUrl("/").usernameParameter("email").passwordParameter("senha").and().logout()
+				.defaultSuccessUrl("/").usernameParameter("email").passwordParameter("password").and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
 
 	}
