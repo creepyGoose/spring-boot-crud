@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -28,7 +31,7 @@ public class Tarefa {
 	private String titulo;
 
 	@Column(name = "tar_desc", length = 100, nullable = true)
-	@Length(max = 100, message="A descrição deve conter até 100 caracters")
+	@Length(max = 100, message = "A descrição deve conter até 100 caracters")
 	private String descricao;
 
 	@Column(name = "tar_data_exp", nullable = false)
@@ -37,6 +40,10 @@ public class Tarefa {
 
 	@Column(name = "tar_ready", nullable = false)
 	private Boolean concluida = false;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "usr_id")
+	private Usuario usuario;
 
 	public Long getId() {
 		return id;
@@ -76,6 +83,14 @@ public class Tarefa {
 
 	public void setConcluida(Boolean concluida) {
 		this.concluida = concluida;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }
